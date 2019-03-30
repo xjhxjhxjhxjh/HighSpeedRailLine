@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="xjhxjhxjhxjh.com.github.pojo"/>
+    </typeAliases>
+    <!-- default引用environment的id,当前所使用的环境 -->
+    <environments default="MySQL">
+        <!-- 声明可以使用的环境 -->
+        <environment id="MySQL">
+            <!-- 使用原生JDBC事务 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///db9?useSSL=false&amp;serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="xjh"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="xjhxjhxjhxjh.com.github.mapper"/>
+    </mappers>
+</configuration>

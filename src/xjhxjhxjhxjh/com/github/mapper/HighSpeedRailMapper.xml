@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="xjhxjhxjhxjh.com.github.mapper.HighSpeedRailMapper">
+    <resultMap type="HighSpeedRail" id="map1">
+        <id column="hid" property="hid"/>
+        <result column="number" property="number"/>
+        <result column="time" property="time"/>
+        <result column="price" property="price"/>
+        <association property="startStation" javaType="Station">
+            <id column="startStation" property="sid"/>
+            <result column="startName" property="sname"/>
+            <result column="startCityName" property="cityName"/>
+        </association>
+        <association property="endStation" javaType="Station">
+            <id column="endStation" property="sid"/>
+            <result column="endName" property="sname"/>
+            <result column="endCityName" property="cityName"/>
+        </association>
+        
+    </resultMap>
+    <select id="selByStartStationAndEndStation" resultMap="map1">
+        select h.*, s.sname startName, e.sname endName, s.cityName startCityName, e.cityName endCityName
+        from highSpeedRail h left join station s on h.startStation = s.sid
+        left join station e on h.endStation = e.sid
+        <where>
+            <if test="start>0">
+                and startStation=#{start}
+            </if>
+            <if test="end>0">
+                and endStation=#{end}
+            </if>
+        </where>
+    </select>
+  </mapper>
